@@ -2,3 +2,5 @@ pandas
 torch
 transformers
 sklearn
+nltk
+yfinance
