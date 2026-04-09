@@ -23,16 +23,16 @@ The predictions are then aggregated by date and combined with market data to bui
 
 ## Data
 
-The training workflow in [model_test_1.ipynb](model_test_1.ipynb) uses a labeled Excel dataset:
+The training workflow in [eval_model.ipynb](eval_model.ipynb) uses a labeled Excel dataset:
 
-- `corpus/text_corpus_news.xlsx` — training corpus referenced in the notebook
-- [data/data_brent_01_15_march.csv](data/data_brent_01_15_march.csv) — market data used for analysis
+- `data/text_corpus_news.xlsx` — training corpus referenced in the notebook
+- [data/brent_march_2026.xls](data/brent_march_2026.xls) — market data used for analysis
 
 > Note: the Excel corpus is referenced in the notebook but is not included in the current repository snapshot.
 
 ## Methodology
 
-The training notebook [model_test_1.ipynb](model_test_1.ipynb) performs the following steps:
+The training notebook [main.ipynb](main.ipynb) performs the following steps:
 
 1. loads the annotated dataset
 2. builds a single target label from `Increase`, `Stable`, and `Degrease`
@@ -42,7 +42,7 @@ The training notebook [model_test_1.ipynb](model_test_1.ipynb) performs the foll
 6. fine-tunes a sequence classification model
 7. saves trained weights to [models/model_rubert-tiny1](models/model_rubert-tiny1)
 
-The custom dataset wrapper is [`CustomDataset`](model_test_1.ipynb), and evaluation is computed in [`compute_metrics`](model_test_1.ipynb).
+The custom dataset wrapper is [`CustomDataset`](eval_model.ipynb), and evaluation is computed in [`compute_metrics`](eval_model.ipynb).
 
 ## Model
 
@@ -70,16 +70,16 @@ pip install jupyter openpyxl
 
 ### 1. Train the model
 
-Open [model_test_1.ipynb](model_test_1.ipynb) and run the cells in order.
+Open [eval_model.ipynb](eval_model.ipynb) and run the cells in order.
 
 ### 2. Run inference and analysis
 
-Open [testing_model_rubert.ipynb](testing_model_rubert.ipynb) to test the end-to-end workflow, including:
+Open [main.ipynb](main.ipynb) to test the end-to-end workflow, including:
 
-- [`run_pipeline`](testing_model_rubert.ipynb)
-- [`detect_trend`](testing_model_rubert.ipynb)
-- [`merge_with_market`](testing_model_rubert.ipynb)
-- [`generate_signals`](testing_model_rubert.ipynb)
+- [`run_pipeline`](main.ipynb)
+- [`detect_trend`](main.ipynb)
+- [`merge_with_market`](main.ipynb)
+- [`generate_signals`](main.ipynb)
 
 ## Example: load saved weights
 
@@ -106,7 +106,11 @@ The project tracks the following metrics during validation:
 - Precision
 - Recall
 
-See the metric calculation in [`compute_metrics`](model_test_1.ipynb) and the reported outputs in [model_test_1.ipynb](model_test_1.ipynb).
+See the metric calculation in [`compute_metrics`](eval_model.ipynb) and the reported outputs in [eval_model.ipynb](eval_model.ipynb).
+
+## Visualization
+An example of calculating the indicator relative to Brent for March 2026:
+![brent vs index march 2026](index_brent_march.png)
 
 ## Limitations
 
